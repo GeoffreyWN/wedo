@@ -2,11 +2,10 @@ import React from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
-import List from "@material-ui/core/List";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import IconButton from "@material-ui/core/IconButton";
-import { mainListItems, secondaryListItems } from "./SidebarOptions";
+import SidebarOptions from "./SidebarOptions";
+import Divider from "@material-ui/core/Divider";
 
 const drawerWidth = 240;
 
@@ -26,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+  },
+  appTitle: {
+    fontSize:'25px',
+    margin:'auto', 
   },
 
   drawerPaper: {
@@ -62,14 +65,16 @@ const Sidebar = ({ handleDrawerClose, open }) => {
       open={open}
     >
       <div className={classes.toolbarIcon}>
+          <h1 className={classes.appTitle}>WeDo</h1>
         <IconButton onClick={handleDrawerClose}>
           <ChevronLeftIcon />
         </IconButton>
       </div>
       <Divider />
-      <List>{mainListItems}</List>
-      <Divider />
-      <List>{secondaryListItems}</List>
+
+      <SidebarOptions />
+
+      
     </Drawer>
   );
 };
