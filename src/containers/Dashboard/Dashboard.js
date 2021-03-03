@@ -7,6 +7,7 @@ import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Copyright from "../../components/Layout/Footer/Copyright/Copyright";
+import LatestProjects from "../../components/LatestProjects";
 
 // import Chart from './Chart';
 // import Deposits from './Deposits';
@@ -33,6 +34,27 @@ const useStyles = makeStyles((theme) => ({
     overflow: "auto",
     flexDirection: "column",
   },
+  widget: {
+    padding: theme.spacing(2),
+    display: "flex",
+    overflow: "auto",
+    flexDirection: "column",
+    textAlign: "center",
+  },
+  widgetTitle: {
+    fontSize: "20px",
+    fontFamily: "Mulish",
+    fontWeight: "400",
+    margin: 0,
+    color: "gray",
+  },
+  widgetStat: {
+    fontSize: "45px",
+    fontFamily: "Mulish",
+    fontWeight: "400",
+    margin: "10px auto 5px auto",
+    // color: "gray"
+  },
   fixedHeight: {
     height: 240,
   },
@@ -52,17 +74,45 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
+            <Grid item xs={6} sm={3}>
+              <Paper className={classes.widget}>
+                <h6 className={classes.widgetTitle}>Projects</h6>
+                <h3 className={classes.widgetStat}>16</h3>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper className={classes.paper}>
+                <h6 className={classes.widgetTitle}>Today's Tasks</h6>
+                <h3 className={classes.widgetStat}>8</h3>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper className={classes.widget}>
+                <h6 className={classes.widgetTitle}> Overdue Tasks</h6>
+                <h3 className={classes.widgetStat}>5</h3>
+              </Paper>
+            </Grid>
+            <Grid item xs={6} sm={3}>
+              <Paper className={classes.widget}>
+                <h6 className={classes.widgetTitle}>Completed Tasks</h6>
+                <h3 className={classes.widgetStat}>20</h3>
+              </Paper>
+            </Grid>
+
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>{/* <Chart /> */}</Paper>
+              <Paper className={fixedHeightPaper}>Chart</Paper>
             </Grid>
-            {/* Recent Deposits */}
+            {/* info */}
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>{/* <Deposits /> */}</Paper>
+              <Paper className={fixedHeightPaper}> INFO </Paper>
             </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>{/* <Orders /> */}</Paper>
+            {/* Recent Projects & Tasks */}
+            <Grid item xs={6} sm={6}>
+              <LatestProjects />
+            </Grid>
+            <Grid item xs={6} sm={6}>
+              <LatestProjects />
             </Grid>
           </Grid>
           <Box pt={4}>
