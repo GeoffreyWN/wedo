@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Copyright from "../../components/Layout/Footer/Copyright/Copyright";
+import ProjectsTable from "../../components/ProjectsTable";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -40,7 +41,7 @@ const Projects = () => {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <h2>Projects</h2>
+          <ProjectsTable/>
           <Box pt={4}>
             <Copyright />
           </Box>
