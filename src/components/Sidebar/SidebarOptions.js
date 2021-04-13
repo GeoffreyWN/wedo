@@ -7,6 +7,14 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+// import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Slide from "@material-ui/core/Slide";
+// import Button from "@material-ui/core/Button";
+
 import DashboardIcon from "@material-ui/icons/Dashboard";
 import Divider from "@material-ui/core/Divider";
 import Collapse from "@material-ui/core/Collapse";
@@ -14,6 +22,11 @@ import AddCircleOutlineOutlinedIcon from "@material-ui/icons/AddCircleOutlineOut
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import AddProject from "../Forms/AddProject";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="down" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,7 +43,8 @@ const SidebarOptions = () => {
   const classes = useStyles();
   const [projectsOpen, setProjectsOpen] = useState(false);
   const [tasksOpen, setTasksOpen] = useState(false);
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleProjects = () => {
     setProjectsOpen(!projectsOpen);
@@ -40,6 +54,14 @@ const SidebarOptions = () => {
   };
   const handleListItemClick = (e, index) => {
     setSelectedIndex(index);
+  };
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
   };
 
   return (
@@ -78,7 +100,23 @@ const SidebarOptions = () => {
               <ListItemIcon>
                 <AddCircleOutlineOutlinedIcon />
               </ListItemIcon>
-              <ListItemText primary="Add Project" />
+              <ListItemText primary="Add Project" onClick={handleOpenDialog} />
+
+              <Dialog
+                divider="true"
+                open={openDialog}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={handleCloseDialog}
+                aria-labelledby="add-dialog-title"
+                aria-describedby="add-dialog-description"
+              >
+                <DialogTitle id="add-dialog-title">{"Add Project"}</DialogTitle>
+                <DialogContent>
+                  <AddProject handleCloseDialog={handleCloseDialog} />
+                </DialogContent>
+                <DialogActions>{/* none */}</DialogActions>
+              </Dialog>
             </ListItem>
 
             <ListItem

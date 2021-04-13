@@ -78,7 +78,7 @@ function Row(props) {
                 </TableHead>
                 <TableBody>
                   {row.details.map((detailsRow, i) => (
-                    <TableRow key={detailsRow.i}>
+                    <TableRow key={i}>
                       <TableCell component="th" scope="row">
                         {detailsRow.info}
                       </TableCell>

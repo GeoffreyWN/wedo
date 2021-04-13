@@ -1,7 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
-import Chip from "@material-ui/core/Chip";
+// import Chip from "@material-ui/core/Chip";
 
 const columns = [
   {
@@ -82,15 +82,15 @@ const rows = [
   },
 ];
 
-const useStyles = makeStyles((theme) => ({}));
+// const useStyles = makeStyles((theme) => ({}));
 
 const ProjectsTable = () => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>
       <div style={{ height: 400, width: "100%" }}>
-        <DataGrid rows={rows} columns={columns} pageSize={5} />
+        <DataGrid key={row => row.id } rows={rows} columns={columns} pageSize={5} />
       </div>
     </>
   );
