@@ -8,8 +8,8 @@ const projectSchema = new Schema({
     description: {type: String, required: true},
     priority: {type: String, required: true},
     status: {type: String, required: true},
-    createdOn: {type: Date, default: new Date() },
-    updatedOn: {type: Date, default: new Date()},
+    createdOn: {type: Date, default: Date.now },
+    updatedOn: {type: Date, default: Date.now },
     // user: { type: Schema.Types.ObjectId, ref: 'users' }
 })
 
