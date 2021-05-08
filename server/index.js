@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.send("wedo server is live");
 });
 app.use("/api/v1/projects", projectRouter);
-// app.use("/api/v1/tasks", taskRouter);
+app.use("/api/v1/tasks", taskRouter);
 
 const PORT = process.env.PORT || 5000;
 

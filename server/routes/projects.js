@@ -4,7 +4,7 @@ const Project = require('../models/Project')
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 
-// @router POST /api/v1/project
+// @router POST /api/v1/projects
 // @description /create project
 // @access Private  TODO:
 
@@ -58,7 +58,7 @@ router.get('/', async (req, res) => {
     try {
         // await Project.updateMany({}, {$set: {deleted: false}}) added a deleted field to existing documents to reflect updated schema
         const projects = await Project.where('deleted').equals(false).sort({ createdOn: -1 })
-        // const projects = await Project.find({deleted: true}).sort({createdOn: -1})
+        // const projects = await Project.find({deleted: false}).sort({createdOn: -1})
         if (!projects) {
             res.status(404).send('No projects found')
         }

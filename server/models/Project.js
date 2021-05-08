@@ -8,9 +8,15 @@ const projectSchema = new Schema({
     description: { type: String, required: true },
     priority: { type: String, required: true },
     status: { type: String, required: true },
+    tasks: [
+        {
+            id:{type: Schema.Types.ObjectId, ref: 'Task' },
+            title: {type: String}
+        }
+    ],
     createdOn: { type: Date, default: Date.now },
     updatedOn: { type: Date, default: Date.now },
-    deleted: { type: Boolean, required: true, default: false }
+    deleted: { type: Boolean, required: true, default: false },
     // user: { type: Schema.Types.ObjectId, ref: 'users' } TODO: link project to user
 })
 
