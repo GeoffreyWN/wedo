@@ -7,6 +7,7 @@ const { body, validationResult } = require("express-validator");
 // @router POST /api/v1/projects
 // @description /create project
 // @access Private  TODO:
+//TODO: fetch projects as per logged in user
 
 router.post("/", [
     body('title', 'Project title is required').not().isEmpty().trim().escape().custom(value => {
@@ -38,8 +39,8 @@ router.post("/", [
 
             const project = await newProject.save()
             const response = {
-                "msg": " success new project added",
-                "addedProject": project
+                msg: " success new project added",
+                addedProject: project
             }
             res.json(response)
 
@@ -64,8 +65,8 @@ router.get('/', async (req, res) => {
         }
 
         const response = {
-            "msg": "success: all projects fetched",
-            "foundProjects": projects
+            msg: "success: all projects fetched",
+            foundProjects: projects
         }
 
         res.json(response)
@@ -103,11 +104,11 @@ router.put('/update/:project_id',
                 return res.status(400).json({ msg: "Project not found" })
             }
 
-            const updatedProject = await Project.findByIdAndUpdate({ '_id': project.id }, { $set: { title, startDate, endDate, description, priority, status, updatedOn: Date.now() } }, { new: true })
+            const updatedProject = await Project.findByIdAndUpdate({ '_id': project_id }, { $set: { title, startDate, endDate, description, priority, status, updatedOn: Date.now() } }, { new: true })
 
             const response = {
-                "msg": " success project was updated",
-                "updatedProject": updatedProject,
+                msg: " success project was updated",
+                updatedProject: updatedProject,
             }
             res.json(response)
 
@@ -135,11 +136,11 @@ router.put('/remove/:project_id',
                 return res.status(404).json({ msg: "Project not found" })
             }
 
-            const deletedProject = await Project.findOneAndUpdate({ '_id': project.id }, { $set: { 'deleted': true, updatedOn: Date.now() } }, { new: true })
+            const deletedProject = await Project.findOneAndUpdate({ '_id': project_id }, { $set: { 'deleted': true, updatedOn: Date.now() } }, { new: true })
 
             const response = {
-                "msg": " success project was removed",
-                "removedProject": deletedProject
+                msg: " success project was removed",
+                removedProject: deletedProject
             }
             res.json(response)
 
@@ -155,6 +156,7 @@ router.put('/remove/:project_id',
 //@router DELETE /api/v1/projects/delete/:project_id/
 //@description /permanently delete a project
 //@access Private TODO:
+//TODO: remove tasks before deleting project
 
 router.delete('/delete/:project_id',
     async (req, res) => {
@@ -170,8 +172,8 @@ router.delete('/delete/:project_id',
 
 
             const response = {
-                "msg": " success project was deleted",
-                "deletedProject": deletedProject
+                msg: " success project was deleted",
+                deletedProject: deletedProject
             }
 
             res.json(response)
@@ -198,8 +200,8 @@ router.get('/:project_id', async (req, res) => {
             return res.status(400).json({ msg: "Project not found" })
         }
         const response = {
-            "msg": "success project found",
-            "deletedProject": foundProject
+            msg: "success project found",
+            deletedProject: foundProject
         }
         res.json(response)
 
