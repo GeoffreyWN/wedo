@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // import { makeStyles } from "@material-ui/core/styles";
 import { DataGrid } from "@material-ui/data-grid";
+import axios from "axios";
+import { apiUrl } from "../utils/constants";
 // import Chip from "@material-ui/core/Chip";
 
 const columns = [
@@ -86,11 +88,35 @@ const rows = [
 
 const ProjectsTable = () => {
   // const classes = useStyles();
+  const [projects, setProjects] = useState({});
+
+  useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/projects`);
+        setProjects(response.data);
+      } catch (error) { 
+        console.error(error);
+      }
+    };
+
+    loadProjects();
+    
+  }, []);
+
+  console.log(projects)
+  
 
   return (
     <>
-      <div style={{ height: 400, width: "100%" }}>
-        <DataGrid key={row => row.id } rows={rows} columns={columns} pageSize={5} />
+      <div style={{ height: 600, width: "100%" }}>
+        
+        <DataGrid
+          key={(row) => row.id}
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+        />
       </div>
     </>
   );

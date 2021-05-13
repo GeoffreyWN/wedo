@@ -10,6 +10,13 @@ connectDB();
 // init midddleware
 app.use(express.json({ extended: false }));
 
+//handle cors
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000")
+  res.header("Access-Control-Allow-Headers", "X-Requested-With, Origin, Accept, Content-Type")
+  next()
+})
+
 //routeS
 app.get("/", (req, res) => {
   res.send("wedo server is live");
